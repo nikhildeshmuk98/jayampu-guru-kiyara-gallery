@@ -1,378 +1,978 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kiara's Magic Universe</title>
+    <title>Kiyara's World | Luxurious Home Experience</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;800&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&family=Dancing+Script:wght@700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-        :root{
-            --dark:#0a0414;--pink:#ff2d75;--light-pink:#ff4d8d;--violet:#c218ff;
-            --purple:#9d4edd;--cyan:#00fff7;--gold:#ffd700;--glass:rgba(15,6,23,0.9)
+        :root {
+            --primary-color: rgba(255, 20, 147, 0.1);
+            --secondary-color: rgba(255, 105, 180, 0.05);
+            --accent-color: rgba(255, 20, 147, 0.3);
+            --text-color: rgba(255, 255, 255, 0.95);
+            --glow-color: rgba(255, 20, 147, 0.4);
+            --dark-bg: #0a0a0f;
+            --pink-dark: #1a001a;
+            --pink-medium: #330033;
+            --pink-light: #ff4da6;
+            --pink-lighter: #ff66b2;
+            --gold-light: #ffd700;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         }
-        body{background:var(--dark);color:#fff;overflow-x:hidden;position:relative}
-        .cosmic-bg{
-            position:fixed;top:0;left:0;width:100%;height:100%;z-index:-3;
-            background:radial-gradient(circle at 20% 30%,rgba(255,45,117,.2) 0,transparent 40%),
-                radial-gradient(circle at 80% 70%,rgba(157,78,221,.15) 0,transparent 40%),
-                linear-gradient(180deg,#050108 0,#0f0617 100%);
-            animation:bgFlow 20s infinite alternate
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        @keyframes bgFlow{
-            0%{transform:scale(1) rotate(0);filter:hue-rotate(0)}
-            100%{transform:scale(1.02) rotate(.5deg);filter:hue-rotate(10deg)}
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--pink-dark) 50%, #33001a 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
         }
-        .hearts-bg{position:fixed;width:100%;height:100%;z-index:-2;pointer-events:none}
-        .heart-float{
-            position:absolute;color:rgba(255,45,117,0.3);font-size:24px;
-            animation:floatHeart 20s linear infinite
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 20, 147, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 105, 180, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(155, 0, 100, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
         }
-        @keyframes floatHeart{
-            0%{transform:translateY(100vh) rotate(0deg);opacity:0}
-            10%{opacity:0.6}
-            90%{opacity:0.6}
-            100%{transform:translateY(-100px) rotate(360deg);opacity:0}
+
+        /* Ultra Minimal Navigation - Desktop Only */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: transparent;
+            transition: var(--transition);
         }
-        .navbar{
-            display:flex;justify-content:space-between;align-items:center;
-            padding:1rem 2rem;background:rgba(15,6,23,.85);
-            backdrop-filter:blur(20px);position:fixed;top:0;width:100%;z-index:1000;
-            border-bottom:1px solid rgba(255,45,117,.3);box-shadow:0 10px 30px rgba(0,0,0,.5);
-            animation:slideDown .8s .5s both
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        @keyframes slideDown{0%{transform:translateY(-100px);opacity:0}100%{transform:translateY(0);opacity:1}}
-        .logo{display:flex;align-items:center;gap:10px;font-size:1.8rem;font-weight:800;
-            background:linear-gradient(135deg,var(--light-pink),var(--violet),var(--cyan));
-            -webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .logo i{font-size:2rem;animation:spin 10s linear infinite}
-        @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-        .nav-links{display:flex;gap:1rem;list-style:none;align-items:center}
-        .nav-links a{
-            color:#fff;text-decoration:none;padding:.7rem 1.5rem;border-radius:50px;
-            background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
-            transition:all .3s ease;display:flex;align-items:center;gap:8px;font-size:.95rem
+
+        .brand-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, var(--pink-light) 50%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            position: relative;
+            padding: 0.5rem 1rem;
+            z-index: 1;
         }
-        .nav-links a:hover{
-            transform:translateY(-3px);background:linear-gradient(135deg,var(--pink),var(--violet));
-            box-shadow:0 10px 20px rgba(255,45,117,.3)
+
+        /* Ultra Minimal Navigation for Desktop */
+        .desktop-nav {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
         }
-        .nav-links a.active{background:linear-gradient(135deg,var(--pink),var(--violet));
-            animation:pulse 2s infinite}
-        @keyframes pulse{0%,100%{box-shadow:0 0 20px rgba(255,45,117,.5)}50%{box-shadow:0 0 30px rgba(255,45,117,.7)}}
-        .logout-btn{
-            margin-left:1rem;padding:.8rem;background:linear-gradient(135deg,#ff4444,#ff2d75);
-            border-radius:50%;width:45px;height:45px;display:flex;align-items:center;
-            justify-content:center;cursor:pointer;transition:all .3s ease;border:none;
-            color:white;font-size:1.2rem
+
+        .desktop-nav-link {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+            background: transparent;
+            border: none;
+            cursor: pointer;
         }
-        .logout-btn:hover{
-            transform:rotate(180deg) scale(1.1);background:linear-gradient(135deg,#ff2d75,#ff4444);
-            box-shadow:0 0 25px rgba(255,68,68,0.6)
+
+        .desktop-nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--pink-light), var(--gold-light), transparent);
+            transition: width 0.4s ease;
         }
-        .menu-toggle{display:none;font-size:1.5rem;cursor:pointer;color:var(--light-pink)}
-        .hero{
-            min-height:100vh;display:flex;flex-direction:column;justify-content:center;
-            align-items:center;padding:5rem 1rem;text-align:center;position:relative
+
+        .desktop-nav-link:hover {
+            color: var(--gold-light);
         }
-        .portal{
-            position:absolute;width:min(80vw,500px);height:min(80vw,500px);border-radius:50%;
-            background:radial-gradient(circle,rgba(255,45,117,.1) 0,transparent 50%);
-            filter:blur(40px);animation:pulsePortal 6s infinite;z-index:-1
+
+        .desktop-nav-link:hover::before {
+            width: 100%;
         }
-        @keyframes pulsePortal{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.05);opacity:.9}}
-        .profile-container{
-            width:min(70vw,300px);height:min(70vw,300px);margin:2rem auto;position:relative
+
+        /* Mobile Menu Toggle - Three Dots */
+        .mobile-menu-toggle {
+            display: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: transparent;
+            border: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 10px;
+            transition: var(--transition);
+            position: relative;
+            z-index: 1001;
         }
-        .profile-frame{
-            width:100%;height:100%;border-radius:50%;overflow:hidden;position:relative;z-index:2;
-            border:4px solid transparent;background:linear-gradient(45deg,var(--pink),var(--violet),var(--cyan)) border-box;
-            animation:borderRotate 5s linear infinite,float 6s ease-in-out infinite;
-            box-shadow:0 0 50px rgba(255,45,117,.5);cursor:pointer;transition:all .4s ease
+
+        .mobile-menu-toggle:hover {
+            transform: scale(1.1);
         }
-        @keyframes borderRotate{0%{background-position:0 50%}100%{background-position:200% 50%}}
-        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
-        .profile-frame:hover{transform:scale(1.1);box-shadow:0 0 80px rgba(255,45,117,.7)}
-        .profile-img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
-        .profile-frame:hover .profile-img{transform:scale(1.15)}
-        .orbit-ring{
-            position:absolute;top:0;left:0;width:100%;height:100%;border:2px dashed rgba(255,45,117,.3);
-            border-radius:50%;animation:orbit 20s linear infinite
+
+        .dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--gold-light);
+            transition: var(--transition);
         }
-        @keyframes orbit{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-        .orbit-item{
-            position:absolute;width:40px;height:40px;background:linear-gradient(135deg,var(--pink),var(--violet));
-            border-radius:50%;top:50%;left:-20px;transform-origin:calc(min(70vw,300px)/2 + 10px);
-            display:flex;align-items:center;justify-content:center;color:#fff;
-            box-shadow:0 0 15px currentColor;transition:transform 0.3s ease
+
+        .mobile-menu-toggle.active .dot {
+            background: var(--pink-light);
         }
-        .orbit-item:hover{transform:scale(1.3)}
-        .hero-title{
-            font-size:clamp(2.5rem, 6vw, 4rem);margin:1rem 0;background:linear-gradient(135deg,var(--light-pink),var(--cyan),var(--violet));
-            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% 200%;
-            animation:gradientShift 5s infinite;font-weight:800;letter-spacing:1px
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: rgba(10, 10, 15, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            padding: 6rem 2rem 2rem;
+            transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: -20px 0 60px rgba(0, 0, 0, 0.5);
         }
-        @keyframes gradientShift{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
-        .hero-subtitle{
-            font-size:clamp(1rem, 3vw, 1.3rem);color:rgba(255,255,255,.9);max-width:800px;
-            line-height:1.6;margin:2rem auto;padding:1.5rem;background:rgba(255,255,255,.05);
-            backdrop-filter:blur(10px);border-radius:20px;border:1px solid rgba(255,255,255,.1);
-            animation:float 8s ease-in-out infinite
+
+        .mobile-menu.active {
+            right: 0;
         }
-        .magic-btn{
-            background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff;padding:1.2rem 3rem;
-            border-radius:50px;text-decoration:none;font-weight:600;font-size:1.2rem;
-            letter-spacing:1px;border:none;cursor:pointer;animation:btnFloat 3s infinite;
-            box-shadow:0 10px 30px rgba(255,45,117,.4);display:flex;align-items:center;
-            gap:12px;margin-top:2rem;transition:all .3s ease
+
+        .mobile-nav-link {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            margin: 0.5rem 0;
+            border-radius: 10px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
         }
-        @keyframes btnFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-        .magic-btn:hover{transform:translateY(-5px) scale(1.05);letter-spacing:1.5px;
-            box-shadow:0 15px 40px rgba(255,45,117,.6)}
-        .back-btn{
-            position:fixed;bottom:20px;left:20px;width:60px;height:60px;background:linear-gradient(135deg,var(--pink),var(--violet));
-            border-radius:50%;display:flex;align-items:center;justify-content:center;
-            color:#fff;font-size:1.5rem;cursor:pointer;z-index:100;box-shadow:0 5px 20px rgba(255,45,117,.3);
-            transition:all .3s ease;border:2px solid rgba(255,255,255,.2)
+
+        .mobile-nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
         }
-        .back-btn:hover{transform:scale(1.2) rotate(-180deg)}
-        .footer{
-            text-align:center;padding:3rem 1rem;background:linear-gradient(to top,rgba(15,6,23,.95),transparent);
-            margin-top:3rem;border-top:1px solid rgba(255,45,117,.2)
+
+        .mobile-nav-link:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--gold-light);
+            padding-left: 2rem;
         }
-        .footer p{color:rgba(255,255,255,.8);margin:.5rem 0;font-size:.9rem}
-        .heart{color:var(--pink);animation:heartbeat 1s infinite;display:inline-block;margin:0 5px}
-        @keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
-        @media (max-width: 768px){
-            .navbar{padding:.8rem 1rem}
-            .nav-links{
-                display:none;position:absolute;top:100%;left:0;width:100%;
-                background:rgba(15,6,23,.98);flex-direction:column;padding:1rem;
-                border-radius:0 0 20px 20px;align-items:center
+
+        .mobile-nav-link:hover::before {
+            left: 100%;
+        }
+
+        /* Hero Section with Direct Text Overlay */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .parallax-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .parallax-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            will-change: transform;
+            filter: brightness(0.8) contrast(1.1);
+            z-index: 1;
+        }
+
+        .parallax-layer.active {
+            opacity: 1;
+        }
+
+        /* Text Overlay - Direct on Image */
+        .text-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                rgba(10, 10, 15, 0.2) 0%, 
+                rgba(26, 0, 26, 0.3) 30%, 
+                rgba(51, 0, 51, 0.4) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Hero Content - Direct on Image */
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+            margin: 0 auto;
+        }
+
+        .image-title {
+            font-family: 'Cinzel', serif;
+            font-size: 4.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #ffffff 0%, #ffccff 50%, #ffd700 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 5px 30px rgba(0, 0, 0, 0.8),
+                         0 0 60px rgba(255, 20, 147, 0.3);
+            line-height: 1.2;
+            font-weight: 800;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .image-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--pink-light), var(--gold-light), transparent);
+            border-radius: 2px;
+        }
+
+        .image-description {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            line-height: 1.8;
+            font-weight: 400;
+            margin-bottom: 3.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.9);
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        /* Minimal Explore Button */
+        .explore-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.2rem 3rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: transparent;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--gold-light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            gap: 1rem;
+            z-index: 10;
+        }
+
+        .explore-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .explore-btn:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-light);
+            color: var(--gold-light);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .explore-btn:hover::before {
+            opacity: 1;
+        }
+
+        .explore-btn i {
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .explore-btn:hover i {
+            transform: translateX(10px);
+        }
+
+        /* Image Indicators */
+        .image-indicators {
+            position: absolute;
+            bottom: 4rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 3;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .indicator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            background: var(--gold-light);
+            border-radius: 50%;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .indicator.active {
+            border-color: var(--gold-light);
+        }
+
+        .indicator.active::before {
+            opacity: 1;
+        }
+
+        .indicator:hover {
+            border-color: var(--pink-light);
+            transform: scale(1.2);
+        }
+
+        /* Enhanced Minimal Footer */
+        .footer {
+            padding: 3rem 2rem;
+            background: transparent;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--pink-light) 50%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .copyright {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 1px;
+            font-weight: 300;
+        }
+
+        /* Page Break Animation */
+        .page-break {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .page-break.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .break-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--pink-dark) 100%);
+            transform: translateX(0);
+            transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1;
+        }
+
+        .break-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--pink-dark) 0%, var(--dark-bg) 100%);
+            transform: translateX(0);
+            transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1;
+        }
+
+        .page-break.active .break-left {
+            transform: translateX(-100%);
+        }
+
+        .page-break.active .break-right {
+            transform: translateX(100%);
+        }
+
+        .transition-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            background: linear-gradient(135deg, var(--pink-light) 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
+            z-index: 2;
+            opacity: 0;
+            animation: fadeInOut 2s ease-in-out;
+            white-space: nowrap;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* Responsive Design */
+        /* Hide mobile menu on desktop */
+        @media (min-width: 901px) {
+            .mobile-menu-toggle,
+            .mobile-menu {
+                display: none !important;
             }
-            .nav-links.active{display:flex}
-            .menu-toggle{display:block}
-            .nav-links a{padding:1rem;justify-content:center;margin-bottom:5px;width:90%}
-            .logout-btn{margin:10px auto;width:50px;height:50px}
-            .hero{padding-top:7rem}
-            .profile-container{width:250px;height:250px;margin:1.5rem auto}
-            .back-btn{width:50px;height:50px;font-size:1.3rem;bottom:15px;left:15px}
+            
+            .desktop-nav {
+                display: flex !important;
+            }
         }
-        @media (max-width: 480px){
-            .hero-title{font-size:2.2rem}
-            .profile-container{width:200px;height:200px}
-            .magic-btn{padding:1rem 2.5rem;font-size:1.1rem}
-            .hero-subtitle{padding:1rem;margin:1.5rem .5rem}
+
+        /* Tablet and Mobile */
+        @media (max-width: 900px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .brand-title {
+                font-size: 2rem;
+                padding: 0.3rem 0.5rem;
+            }
+            
+            .image-title {
+                font-size: 3rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .image-description {
+                font-size: 1.4rem;
+                padding: 0 1rem;
+                margin-bottom: 3rem;
+            }
+            
+            .explore-btn {
+                padding: 1rem 2.5rem;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 0.8rem 1.5rem;
+            }
+            
+            .brand-title {
+                font-size: 1.8rem;
+            }
+            
+            .image-title {
+                font-size: 2.2rem;
+            }
+            
+            .image-title::after {
+                width: 200px;
+            }
+            
+            .image-description {
+                font-size: 1.2rem;
+                line-height: 1.6;
+            }
+            
+            .explore-btn {
+                padding: 0.9rem 2rem;
+                font-size: 1rem;
+            }
+            
+            .footer {
+                padding: 2rem 1.5rem;
+            }
+            
+            .footer-title {
+                font-size: 2rem;
+            }
+            
+            .transition-text {
+                font-size: 2.5rem;
+            }
+            
+            .mobile-menu {
+                width: 250px;
+                padding: 5rem 1.5rem 2rem;
+            }
+            
+            .mobile-nav-link {
+                font-size: 1.2rem;
+                padding: 0.8rem 1.2rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .image-title {
+                font-size: 1.8rem;
+            }
+            
+            .image-description {
+                font-size: 1.1rem;
+            }
+            
+            .explore-btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .brand-title {
+                font-size: 1.6rem;
+            }
+            
+            .mobile-menu-toggle {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        /* Specific adjustments for different devices */
+        /* iPhone specific */
+        @supports (-webkit-touch-callout: none) {
+            .hero {
+                height: -webkit-fill-available;
+            }
+        }
+
+        /* Windows/Mac scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 10, 15, 0.9);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--pink-light) 0%, var(--gold-light) 100%);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--pink-light) 100%);
         }
     </style>
 </head>
 <body>
-    <!-- Background -->
-    <div class="cosmic-bg"></div>
-    <div class="hearts-bg" id="heartsBg"></div>
-    <div class="portal"></div>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="brand-title">Kiyara's World</div>
+        
+        <!-- Desktop Navigation -->
+        <div class="desktop-nav">
+    <a href="about.html" class="desktop-nav-link">About</a>
+    <a href="special.html" class="desktop-nav-link">Special</a>
+    <a href="family.html" class="desktop-nav-link">Family</a>
+    <a href="2K26.html" class="desktop-nav-link">2K26</a>
+    
+</div>
 
-    <!-- Back Button -->
-    <div class="back-btn" id="backBtn">
-        <i class="fas fa-magic"></i>
-    </div>
+        
+        <!-- Mobile Menu Toggle (Three Dots) -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </button>
+        
+        <!-- Mobile Menu -->
+       <div class="mobile-menu" id="mobileMenu">
+    <a href="about.html" class="mobile-nav-link">About</a>
+    <a href="special.html" class="mobile-nav-link">Special</a>
+    <a href="family.html" class="mobile-nav-link">Family</a>
+    <a href="2K26.html" class="mobile-nav-link">2K26</a>                                                                
+</div>
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="logo">
-            <i class="fas fa-sparkles"></i>
-            <span>Kiyara's Gallery</span>
-        </div>
-        <div class="menu-toggle" id="menuToggle">
-            <i class="fas fa-bars"></i>
-        </div>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="about.html"><i class="fas fa-star"></i> About</a></li>
-           
-            <li><a href="special.html"><i class="fas fa-gem"></i> Special</a></li>
-           
-            <li><a href="family.html"><i class="fas fa-heart"></i> Family</a></li>
-             <li><a href="view.html"><i class="fas fa-image"></i> view</a></li>
-            <li>
-                <button class="logout-btn" id="logoutBtn" title="Logout">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
-            </li>
-        </ul>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Parallax -->
     <section class="hero">
-        <div class="profile-container">
-            <div class="orbit-ring">
-                <div class="orbit-item" style="transform: rotate(0deg) translate(150px)">
-                    <i class="fas fa-heart"></i>
-                </div>
-                <div class="orbit-item" style="transform: rotate(60deg) translate(150px)">
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="orbit-item" style="transform: rotate(120deg) translate(150px)">
-                    <i class="fas fa-gem"></i>
-                </div>
-                <div class="orbit-item" style="transform: rotate(180deg) translate(150px)">
-                    <i class="fas fa-crown"></i>
-                </div>
-                <div class="orbit-item" style="transform: rotate(240deg) translate(150px)">
-                    <i class="fas fa-moon"></i>
-                </div>
-                <div class="orbit-item" style="transform: rotate(300deg) translate(150px)">
-                    <i class="fas fa-sun"></i>
-                </div>
-            </div>
-            <div class="profile-frame">
-                <img src="images/kutty 6.jpeg" alt="Princess Kiara" class="profile-img">
-            </div>
+        <!-- Dark overlay for better text visibility -->
+        <div class="text-overlay"></div>
+        
+        <div class="parallax-container" id="parallaxContainer">
+            <img src="images/firstcry.jpeg" alt="" class="parallax-layer layer-1 active" data-speed="0.2">
+            <img src="images/beacj 3.jpeg" alt="" class="parallax-layer layer-2" data-speed="0.4">
+            <img src="images/2k26/bogi31.jpeg" alt="" class="parallax-layer layer-2" data-speed="0.4">
+            <img src="images/tra 14.jpeg" alt="" class="parallax-layer layer-3" data-speed="0.6">
+             
+          
         </div>
-        
-        <h1 class="hero-title">PRINCESS KIYARA</h1>
-        
-        <p class="hero-subtitle">
-            Welcome to the magical world of Princess Kiyara. Every moment is a treasure, 
-            every memory a precious gem in the crown of our hearts. Explore her enchanting 
-            journey through this digital wonderland filled with love, laughter, and magic.
-        </p>
-        
-        <button class="magic-btn" id="exploreBtn">
-            <span>Explore My Gallery</span>
-            <i class="fas fa-wand-magic-sparkles"></i>
-        </button>
+
+        <div class="hero-content">
+            <h1 class="image-title" id="imageTitle">FIRST SMILE OF OUR CUTIEPIE</h1>
+            <p class="image-description" id="imageDescription">
+                The first smile of our cutiepie feels like a gentle sunrise, filling every heart around with pure warmth and endless love.In that tiny smile lives a whole world of innocence, joy, and the sweetest promise of happiness.
+            </p>
+            <a href="#" class="explore-btn" id="exploreBtn">
+                <span>Explore the Gallery</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <div class="image-indicators">
+            <div class="indicator active" data-index="0"></div>
+            <div class="indicator" data-index="1"></div>
+            <div class="indicator" data-index="2"></div>
+            <div class="indicator" data-index="3"></div>
+             
+        </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>Crafted with <span class="heart"><i class="fas fa-heart"></i></span> for Princess Kiyara</p>
-        <p>© 2023 Kiyara's Magical Universe. All rights reserved.</p>
-        <p style="margin-top:1.5rem;font-size:.8rem;color:rgba(255,255,255,.6)">
-            <i class="fas fa-sparkles"></i> Made with love & magic <i class="fas fa-sparkles"></i>
-        </p>
-    </footer>
+
+    <!-- Page Break Animation -->
+    <div class="page-break" id="pageBreak">
+        <div class="break-left"></div>
+        <div class="break-right"></div>
+        <div class="transition-text">Entering Gallery...</div>
+    </div>
 
     <script>
-        // Initialize
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-        const backBtn = document.getElementById('backBtn');
-        const exploreBtn = document.getElementById('exploreBtn');
-        const logoutBtn = document.getElementById('logoutBtn');
-        const heartsBg = document.getElementById('heartsBg');
-
-        // Create floating hearts
-        function createHearts() {
-            for(let i=0;i<25;i++){
-                const heart = document.createElement('div');
-                heart.className='heart-float';
-                heart.innerHTML='<i class="fas fa-heart"></i>';
-                heart.style.cssText=`left:${Math.random()*100}%;
-                    animation-delay:${Math.random()*20}s;
-                    font-size:${Math.random()*20+10}px;
-                    color:rgba(255,45,117,${Math.random()*0.3+0.1})`;
-                heartsBg.appendChild(heart);
-            }
-        }
-
-        // Toggle menu
-        menuToggle.addEventListener('click',()=>{
-            navLinks.classList.toggle('active');
-            menuToggle.innerHTML=navLinks.classList.contains('active')?
-                '<i class="fas fa-times"></i>':'<i class="fas fa-bars"></i>';
-        });
-
-        // Back button action
-        backBtn.addEventListener('click',()=>{
-            createSparkles(backBtn);
-            setTimeout(()=>window.location.href='index.html',800);
-        });
-
-        // Explore button action
-        exploreBtn.addEventListener('click',()=>{
-            createSparkles(exploreBtn,15);
-            exploreBtn.innerHTML='<i class="fas fa-sparkles"></i> <span>showing gallery !</span>';
-            setTimeout(()=>window.location.href='gallery.html',1200);
-        });
-
-        // Logout button action
-        logoutBtn.addEventListener('click',()=>{
-            // Create special logout sparkles
-            const rect = logoutBtn.getBoundingClientRect();
-            for(let i=0;i<20;i++){
-                const spark = document.createElement('div');
-                spark.style.cssText=`position:fixed;width:8px;height:8px;
-                    background:radial-gradient(circle,#ff4444,#ff2d75);border-radius:50%;
-                    z-index:1000;left:${rect.left+rect.width/2}px;
-                    top:${rect.top+rect.height/2}px;pointer-events:none`;
-                document.body.appendChild(spark);
-                const angle = Math.random()*Math.PI*2;
-                const dist = Math.random()*80+40;
-                spark.animate([
-                    {transform:'translate(0,0) scale(1)',opacity:1},
-                    {transform:`translate(${Math.cos(angle)*dist}px,${Math.sin(angle)*dist}px) scale(0)`,opacity:0}
-                ],{duration:1000,easing:'ease-out'});
-                setTimeout(()=>spark.remove(),1000);
-            }
-            
-            // Change button appearance
-            logoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-            logoutBtn.style.background = 'linear-gradient(135deg, #ff2d75, #9d4edd)';
-            
-            setTimeout(()=>{
-                window.location.href = 'index.html';
-            },1500);
-        });
-
-        // Sparkle effect
-        function createSparkles(element,count=10){
-            const rect=element.getBoundingClientRect();
-            for(let i=0;i<count;i++){
-                const spark=document.createElement('div');
-                spark.style.cssText=`position:fixed;width:8px;height:8px;
-                    background:radial-gradient(circle,#ffd700,#ff4d8d);border-radius:50%;
-                    z-index:1000;left:${rect.left+rect.width/2}px;
-                    top:${rect.top+rect.height/2}px;pointer-events:none`;
-                document.body.appendChild(spark);
-                const angle=Math.random()*Math.PI*2;
-                const dist=Math.random()*60+30;
-                spark.animate([
-                    {transform:'translate(0,0) scale(1)',opacity:1},
-                    {transform:`translate(${Math.cos(angle)*dist}px,${Math.sin(angle)*dist}px) scale(0)`,opacity:0}
-                ],{duration:800,easing:'ease-out'});
-                setTimeout(()=>spark.remove(),800);
-            }
-        }
-
-        // Close menu on link click
-        document.querySelectorAll('.nav-links a').forEach(link=>{
-            link.addEventListener('click',()=>{
-                navLinks.classList.remove('active');
-                menuToggle.innerHTML='<i class="fas fa-bars"></i>';
-            });
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll',()=>{
-            document.querySelector('.navbar').style.background=
-                window.scrollY>50?'rgba(15,6,23,0.95)':'rgba(15,6,23,0.85)';
-        });
-
-        // Initialize floating hearts
-        createHearts();
+        // Mobile menu toggle with three dots
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navbar = document.getElementById('navbar');
         
-        // Add hover effect to orbit items
-        document.querySelectorAll('.orbit-item').forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                item.style.transform += ' scale(1.3)';
-            });
-            item.addEventListener('mouseleave', () => {
-                item.style.transform = item.style.transform.replace(' scale(1.3)', '');
+        mobileMenuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                document.body.style.overflow = '';
             });
         });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Parallax image slider
+        const images = document.querySelectorAll('.parallax-layer');
+        const indicators = document.querySelectorAll('.indicator');
+        const imageTitle = document.getElementById('imageTitle');
+        const imageDescription = document.getElementById('imageDescription');
+        let currentIndex = 0;
+        
+        // Image titles and descriptions
+        const imageData = [
+            {
+                title: "FIRST SMILE OF OUR CUTIEPIE",
+                description: "The first smile of our cutiepie feels like a gentle sunrise, filling every heart around with pure warmth and endless love."
+            },
+            {
+                title: "BEACH SCENARIO",
+                description: "In this beach scenario, her innocent smile dances with the ocean breeze, as if the waves themselves paused to admire her joy. Wrapped in soft sunshine and endless blue, she turns a simple moment by the sea into a timeless memory filled with warmth, laughter, and pure happiness."
+            },
+            {
+                title: "BHOGI PALLU CELEBRATION",
+                description: "In this Bhogi Pallu celebration, she sits like a tiny blessing wrapped in tradition, grace, and divine innocence. Surrounded by festive colors and gentle petals, her calm eyes and delicate smile reflect the purity of culture, love, and prayers that wish her a life filled with happiness, prosperity, and endless light."
+            },
+            {
+                title: "KIYARA IN & AS RADHA",
+                description: "Kiyara in and as Radha looks like a living painting of devotion and joy, where innocence meets divine grace in the most beautiful form. With every gentle step, sparkling smile, and flowing colors, she carries the timeless charm of Radha, turning this moment into a magical blend of tradition, purity, and everlasting beauty."
+            }
+             
+        ];
+        
+        // Function to change image
+        function changeImage(index) {
+            // Update active image
+            images.forEach(img => img.classList.remove('active'));
+            images[index].classList.add('active');
+            
+            // Update active indicator
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            indicators[index].classList.add('active');
+            
+            // Update title and description with fade effect
+            imageTitle.style.opacity = '0';
+            imageDescription.style.opacity = '0';
+            
+            setTimeout(() => {
+                imageTitle.textContent = imageData[index].title;
+                imageDescription.textContent = imageData[index].description;
+                imageTitle.style.opacity = '1';
+                imageDescription.style.opacity = '1';
+            }, 300);
+            
+            currentIndex = index;
+        }
+        
+        // Set up indicator clicks
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                changeImage(index);
+                resetAutoSlide();
+            });
+        });
+        
+        // Auto-slide functionality
+        let slideInterval = setInterval(nextSlide, 5000);
+        
+        function nextSlide() {
+            let nextIndex = (currentIndex + 1) % images.length;
+            changeImage(nextIndex);
+        }
+        
+        function resetAutoSlide() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+        
+        // Parallax effect on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth - e.pageX * 2) / 100;
+            const y = (window.innerHeight - e.pageY * 2) / 100;
+            
+            images.forEach(layer => {
+                if (layer.classList.contains('active')) {
+                    const speed = layer.getAttribute('data-speed') || 0.5;
+                    layer.style.transform = `translateX(${x * speed}px) translateY(${y * speed}px) scale(1.1)`;
+                }
+            });
+        });
+        
+        // Page break animation for Explore button
+        const exploreBtn = document.getElementById('exploreBtn');
+        const pageBreak = document.getElementById('pageBreak');
+        
+        exploreBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Activate page break animation
+            pageBreak.classList.add('active');
+            
+            // Wait for animation to complete, then navigate
+            setTimeout(() => {
+                window.location.href = 'gallery.html';
+            }, 1800);
+        });
+        
+        // Image preloading for better performance
+        window.addEventListener('load', () => {
+            images.forEach(img => {
+                const src = img.getAttribute('src');
+                if (src) {
+                    const preloadImg = new Image();
+                    preloadImg.src = src;
+                }
+            });
+            
+            // Initialize with fade-in effect
+            setTimeout(() => {
+                changeImage(0);
+                
+                // Add subtle animations
+                document.querySelectorAll('.desktop-nav-link, .explore-btn').forEach(el => {
+                    el.style.transform = 'translateY(20px)';
+                    el.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        el.style.transform = 'translateY(0)';
+                        el.style.opacity = '1';
+                        el.style.transition = 'transform 0.6s ease, opacity 0.6s ease';
+                    }, 200);
+                });
+                
+                // Add floating animation to explore button
+                setInterval(() => {
+                    exploreBtn.style.transform = 'translateY(-5px)';
+                    setTimeout(() => {
+                        exploreBtn.style.transform = 'translateY(0)';
+                    }, 800);
+                }, 1600);
+            }, 500);
+        });
+        
+        // Responsive adjustments
+        window.addEventListener('resize', () => {
+            // Close mobile menu on resize to desktop
+            if (window.innerWidth > 900) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Add image loading error handling
+        images.forEach(img => {
+            img.addEventListener('error', function() {
+                this.style.display = 'none';
+                console.log('Image failed to load:', this.src);
+            });
+        });
+        
+        // Device detection for specific optimizations
+        const userAgent = navigator.userAgent.toLowerCase();
+        if (/iphone|ipad|ipod/.test(userAgent)) {
+            document.body.classList.add('ios-device');
+        } else if (/android/.test(userAgent)) {
+            document.body.classList.add('android-device');
+        } else if (/windows/.test(userAgent)) {
+            document.body.classList.add('windows-device');
+        } else if (/mac/.test(userAgent)) {
+            document.body.classList.add('mac-device');
+        }
     </script>
 </body>
 </html>
