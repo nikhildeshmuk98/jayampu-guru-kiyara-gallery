@@ -584,6 +584,64 @@
         .page-content {
             animation: pageEnter 1s ease-out forwards;
         }
+
+        /* Varalakshmi Goddess Button */
+.varalakshmi-nav {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    background: rgba(197, 48, 48, 0.25);
+    border: 1px solid rgba(251, 191, 36, 0.5);
+    box-shadow: 0 5px 20px rgba(245, 158, 11, 0.25);
+    transition: all 0.35s ease;
+    text-decoration: none;
+}
+
+.varalakshmi-nav img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.35s ease;
+}
+
+.varalakshmi-nav:hover {
+    transform: scale(1.12);
+    background: var(--bhogi-red);
+    box-shadow: 0 0 30px rgba(251, 191, 36, 0.8);
+}
+
+.varalakshmi-nav:hover img {
+    transform: scale(1.08);
+}
+
+/* Golden shine effect */
+.varalakshmi-nav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.5),
+        transparent
+    );
+    transition: left 0.6s ease;
+    z-index: 2;
+}
+
+.varalakshmi-nav:hover::before {
+    left: 100%;
+}
     </style>
 </head>
 <body>
@@ -597,13 +655,27 @@
         
 
         <!-- Gallery Header -->
-        <header class="gallery-header glass">
-            <div class="back-arrow glass" id="backArrow">
-                <i class="fas fa-arrow-left"></i>
-            </div>
-            <div class="gallery-title">2K26 Gallery</div>
-            <div style="width: 60px;"></div> <!-- Spacer for alignment -->
-        </header>
+       <header class="gallery-header glass">
+
+    <!-- Left: Back Button -->
+    <div class="back-arrow glass" id="backArrow">
+        <i class="fas fa-arrow-left"></i>
+    </div>
+
+    <!-- Center: Gallery Title -->
+    <div class="gallery-title">2K26 Gallery</div>
+
+    <!-- Right: Varalakshmi Goddess -->
+    <a href="varalakshmi.html"
+       class="varalakshmi-nav glass"
+       title="Varalakshmi Devi">
+
+        <img src="images/2k26/varalakshmi photos/varalakshmi1.jpeg"
+             alt="Varalakshmi Devi">
+
+    </a>
+
+</header>
 
         <!-- Image Grid -->
         <div class="image-grid" id="imageGrid">
@@ -664,6 +736,72 @@
             {
                 url: 'images/2k26/san8.jpeg',
                
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi8.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi10.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi11.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi12.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi14.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi15.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi16.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi17.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi18.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi19.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi20.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi22.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi23.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi24.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi25.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi26.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi27.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi28.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi29.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi30.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalakshmi31.jpeg',
+            },
+            {
+                url: 'images/2k26/varalakshmi photos/varalaksmi21.jpeg',
             },
              {
                 url: 'images/2k26/bogi1.jpeg',

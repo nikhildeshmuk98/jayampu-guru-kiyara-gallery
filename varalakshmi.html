@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>శ్రీ వరలక్ష్మీ దేవి · Varalakshmi Gallery</title>
+  <!-- Google Fonts: elegant Telugu + modern sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;600;700&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600&display=swap" rel="stylesheet" />
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans Telugu', sans-serif;
+      background: #1c0b0b;
+      background-image: radial-gradient(circle at 20% 30%, #5a1f1f, #2c0e0e 80%, #120606);
+      min-height: 100vh;
+      color: #f5e6d3;
+      overflow-x: hidden;
+    }
+
+    /* ---- particles canvas (golden sparkles) ---- */
+    #particles-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* glowing orbs (divine light) */
+    .glow-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.25;
+      animation: orbFloat 12s infinite alternate ease-in-out;
+    }
+    .glow-orb-1 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #d4a373, #a55b3a);
+      top: -5%;
+      left: -5%;
+      animation-delay: 0s;
+    }
+    .glow-orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #b8863a, #7a2e2e);
+      bottom: -10%;
+      right: -5%;
+      animation-delay: 3s;
+    }
+    .glow-orb-3 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, #c99a4a, #8f3d2a);
+      top: 40%;
+      left: 60%;
+      animation-delay: 6s;
+      opacity: 0.15;
+    }
+
+    @keyframes orbFloat {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, -30px) scale(1.2); }
+    }
+
+    /* ---- main container ---- */
+    .app {
+      position: relative;
+      z-index: 5;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px 24px 40px;
+    }
+
+    /* ---- header / nav ---- */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 10px 20px;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      margin-bottom: 32px;
+      backdrop-filter: blur(4px);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(255, 215, 0, 0.08);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(212, 175, 55, 0.5);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+      color: #f0d078;
+      font-size: 26px;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: pointer;
+    }
+    .back-btn i {
+      transition: transform 0.2s;
+    }
+    .back-btn:hover {
+      transform: scale(1.08);
+      border-color: #f5c542;
+      box-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+      background: rgba(255, 215, 0, 0.18);
+    }
+    .back-btn:hover i {
+      transform: translateX(-3px);
+    }
+
+    .header-center {
+      text-align: center;
+      flex: 1;
+      min-width: 200px;
+    }
+    .header-center h1 {
+      font-family: 'Noto Sans Telugu', 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #f9e08a, #d4af37, #f7d77b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .header-center .sub {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 1rem;
+      letter-spacing: 4px;
+      color: #e8d5b5;
+      text-shadow: 0 0 12px rgba(212, 175, 55, 0.2);
+      margin-top: 2px;
+      -webkit-text-fill-color: #e8d5b5;
+      background: none;
+    }
+    .header-center .ornament {
+      font-size: 1.6rem;
+      color: #d4af37;
+      opacity: 0.7;
+    }
+
+    .header-right {
+      width: 52px; /* balance */
+    }
+
+    /* ---- gallery grid ---- */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 28px 24px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 6;
+    }
+
+    /* card */
+    .gallery-card {
+      aspect-ratio: 4 / 5;
+      border-radius: 24px;
+      background: rgba(30, 12, 12, 0.4);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212, 175, 55, 0.1) inset;
+      overflow: hidden;
+      position: relative;
+      transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: pointer;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: cardEntrance 0.6s forwards;
+    }
+
+    .gallery-card:nth-child(1) { animation-delay: 0.04s; }
+    .gallery-card:nth-child(2) { animation-delay: 0.08s; }
+    .gallery-card:nth-child(3) { animation-delay: 0.12s; }
+    .gallery-card:nth-child(4) { animation-delay: 0.16s; }
+    .gallery-card:nth-child(5) { animation-delay: 0.20s; }
+    .gallery-card:nth-child(6) { animation-delay: 0.24s; }
+    .gallery-card:nth-child(7) { animation-delay: 0.28s; }
+    .gallery-card:nth-child(8) { animation-delay: 0.32s; }
+    .gallery-card:nth-child(9) { animation-delay: 0.36s; }
+    .gallery-card:nth-child(10) { animation-delay: 0.40s; }
+    .gallery-card:nth-child(11) { animation-delay: 0.44s; }
+    .gallery-card:nth-child(12) { animation-delay: 0.48s; }
+
+    @keyframes cardEntrance {
+      0% { opacity: 0; transform: translateY(30px) scale(0.96); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .gallery-card:hover {
+      transform: scale(1.02) translateY(-6px);
+      border-color: #f5c542;
+      box-shadow: 0 20px 50px rgba(212, 175, 55, 0.3), 0 0 30px rgba(212, 175, 55, 0.15);
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      backface-visibility: hidden;
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.04);
+    }
+
+    /* download button - hidden by default */
+    .download-btn {
+      position: absolute;
+      bottom: 18px;
+      right: 18px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(20, 8, 8, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(212, 175, 55, 0.7);
+      color: #f5d78c;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      z-index: 12;
+      text-decoration: none;
+      pointer-events: none;
+    }
+    .download-btn i {
+      pointer-events: none;
+    }
+
+    .gallery-card:hover .download-btn,
+    .gallery-card:focus-within .download-btn {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .download-btn:hover {
+      background: rgba(212, 175, 55, 0.3);
+      border-color: #f5c542;
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+      color: #fff3c9;
+    }
+
+    /* fullscreen modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 2, 2, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.35s ease;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      background: rgba(20, 8, 8, 0.5);
+      border-radius: 36px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      box-shadow: 0 0 80px rgba(212, 175, 55, 0.15);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: scale(0.92);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-image-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 24px;
+    }
+
+    .modal-image-wrapper img {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+      object-fit: contain;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: #f5d78c;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      z-index: 20;
+    }
+
+    .modal-close:hover {
+      background: rgba(212, 175, 55, 0.2);
+      transform: scale(1.05);
+      border-color: #f5c542;
+    }
+
+    .modal-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      color: #f0d078;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      z-index: 20;
+    }
+    .modal-nav:hover {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: #f5c542;
+    }
+    .modal-nav.prev { left: 12px; }
+    .modal-nav.next { right: 12px; }
+
+    .modal-counter {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      padding: 8px 22px;
+      border-radius: 40px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      color: #e8d5b5;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      font-weight: 400;
+      z-index: 20;
+      white-space: nowrap;
+    }
+
+    /* footer */
+    .footer {
+      margin-top: 70px;
+      padding: 30px 20px 20px;
+      text-align: center;
+      border-top: 1px solid rgba(212, 175, 55, 0.15);
+      font-family: 'Noto Sans Telugu', 'Inter', sans-serif;
+    }
+
+    .footer .telugu {
+      font-size: 1.4rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #f5d78c, #d4af37);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 2px;
+    }
+
+    .footer .english {
+      font-size: 1rem;
+      color: #dac09a;
+      margin-top: 8px;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .footer .ornament-line {
+      font-size: 1.2rem;
+      color: #b8863a;
+      opacity: 0.6;
+      margin: 6px 0;
+    }
+
+    /* ---- responsive ---- */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 12px 4px 16px;
+      }
+      .header-center h1 {
+        font-size: 1.6rem;
+        gap: 6px;
+      }
+      .header-center .sub {
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+      }
+      .back-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+      }
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 16px;
+      }
+      .download-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+        bottom: 12px;
+        right: 12px;
+      }
+      .modal-content {
+        padding: 10px;
+        border-radius: 28px;
+      }
+      .modal-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+      }
+      .modal-nav.prev { left: 6px; }
+      .modal-nav.next { right: 6px; }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .header-center h1 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- glowing orbs -->
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+  <div class="glow-orb glow-orb-3"></div>
+
+  <!-- particle canvas -->
+  <canvas id="particles-canvas"></canvas>
+
+  <div class="app">
+    <!-- header -->
+    <header class="header">
+      <div class="header-left">
+        <a href="images.html" class="back-btn" aria-label="Back to images">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+      </div>
+      <div class="header-center">
+        <h1>
+          <span class="ornament">✦</span>
+          మా ఇంటి మహాలక్ష్మి
+          <span class="ornament">✦</span>
+        </h1>
+        <span class="sub">🪷 Our Home's Mahalakshmi 🪷</span>
+      </div>
+      <div class="header-right"></div>
+    </header>
+
+    <!-- gallery -->
+    <div class="gallery-grid" id="galleryGrid"></div>
+
+    <!-- footer -->
+    <footer class="footer">
+    <div class="ornament-line">🪷 ✦ ॐ ✦ 🪷</div>
+
+    <div class="telugu">
+        మా ఇంటి మహాలక్ష్మి — మా ఇంటి వెలుగు, మా కుటుంబానికి వరం
+    </div>
+
+    <div class="english">
+        Our home’s Mahalakshmi — the light of our home and the blessing of our family.
+    </div>
+
+    <div style="margin-top:14px; font-size:0.8rem; color:#7a5a3a;">
+        ✦ divine blessings ✦
+    </div>
+</footer>
+  </div>
+
+  <!-- fullscreen modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <div class="modal-image-wrapper" id="modalImageWrapper">
+        <img id="modalImage" src="" alt="Varalakshmi Devi" />
+        <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+        <button class="modal-nav prev" id="modalPrev"><i class="fas fa-chevron-left"></i></button>
+        <button class="modal-nav next" id="modalNext"><i class="fas fa-chevron-right"></i></button>
+        <div class="modal-counter" id="modalCounter">1 / 1</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // ----- PHOTOS ARRAY (add your images here) -----
+      const photos = [
+        "images/2k26/varalakshmi photos/varalakshmi1.jpeg",
+        "images/2k26/varalakshmi photos/varalakshmi2.jpeg",
+        "images/2k26/varalakshmi photos/varalakshmi3.jpeg",
+        "images/2k26/varalakshmi photos/varalakshmi4.jpeg",
+        "images/2k26/varalakshmi photos/varalakshmi5.jpeg",
+        "images/2k26/varalakshmi photos/varalakshmi6.jpeg",
+        "images/2k26/varalakshmi photos/varalakshmi7.jpeg",
+        "images/2k26/varalakshmi photos/varalakshmi9.jpeg",
+        // add more paths here, e.g. "images/2k26/varalakshmi photos/varalakshmi16.jpeg",
+      ];
+
+      // ----- render gallery -----
+      const grid = document.getElementById('galleryGrid');
+      function renderGallery() {
+        grid.innerHTML = '';
+        photos.forEach((src, index) => {
+          const card = document.createElement('div');
+          card.className = 'gallery-card';
+          card.setAttribute('data-index', index);
+
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = `Varalakshmi Devi ${index+1}`;
+          img.loading = 'lazy';
+
+          const downloadBtn = document.createElement('button');
+          downloadBtn.className = 'download-btn';
+          downloadBtn.setAttribute('aria-label', 'Download photo');
+          downloadBtn.innerHTML = '<i class="fas fa-download"></i>';
+          // stop propagation so card click doesn't open modal
+          downloadBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            downloadImage(src, index);
+          });
+
+          card.appendChild(img);
+          card.appendChild(downloadBtn);
+
+          // open modal on card click (not on download btn)
+          card.addEventListener('click', function(e) {
+            // if the target is the button or inside button, ignore
+            if (e.target.closest('.download-btn')) return;
+            openModal(index);
+          });
+
+          grid.appendChild(card);
+        });
+      }
+
+      // ----- download individual photo -----
+      function downloadImage(imageUrl, index) {
+        fetch(imageUrl)
+          .then(res => res.blob())
+          .then(blob => {
+            const link = document.createElement('a');
+            const ext = imageUrl.split('.').pop().split('?')[0] || 'jpg';
+            link.download = `varalakshmi-${index+1}.${ext}`;
+            link.href = URL.createObjectURL(blob);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+          })
+          .catch(() => {
+            // fallback: direct link (may open in new tab on some browsers)
+            const link = document.createElement('a');
+            link.href = imageUrl;
+            link.download = `varalakshmi-${index+1}.jpg`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          });
+      }
+
+      // ----- fullscreen modal -----
+      let currentModalIndex = 0;
+      const overlay = document.getElementById('modalOverlay');
+      const modalImg = document.getElementById('modalImage');
+      const counter = document.getElementById('modalCounter');
+      const closeBtn = document.getElementById('modalClose');
+      const prevBtn = document.getElementById('modalPrev');
+      const nextBtn = document.getElementById('modalNext');
+
+      function openModal(index) {
+        if (index < 0 || index >= photos.length) return;
+        currentModalIndex = index;
+        modalImg.src = photos[currentModalIndex];
+        updateCounter();
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      function updateCounter() {
+        counter.textContent = `${currentModalIndex+1} / ${photos.length}`;
+      }
+
+      function showPrev() {
+        if (photos.length === 0) return;
+        currentModalIndex = (currentModalIndex - 1 + photos.length) % photos.length;
+        modalImg.src = photos[currentModalIndex];
+        updateCounter();
+      }
+
+      function showNext() {
+        if (photos.length === 0) return;
+        currentModalIndex = (currentModalIndex + 1) % photos.length;
+        modalImg.src = photos[currentModalIndex];
+        updateCounter();
+      }
+
+      // modal events
+      closeBtn.addEventListener('click', closeModal);
+      prevBtn.addEventListener('click', function(e) { e.stopPropagation(); showPrev(); });
+      nextBtn.addEventListener('click', function(e) { e.stopPropagation(); showNext(); });
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeModal();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (!overlay.classList.contains('active')) return;
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowLeft') showPrev();
+        if (e.key === 'ArrowRight') showNext();
+      });
+
+      // ----- particles (golden sparkles) -----
+      const canvas = document.getElementById('particles-canvas');
+      const ctx = canvas.getContext('2d');
+      let width, height;
+      let particles = [];
+
+      function resizeCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          this.size = Math.random() * 2.6 + 1.2;
+          this.speedY = Math.random() * 0.25 + 0.08;
+          this.opacity = Math.random() * 0.6 + 0.25;
+          this.drift = (Math.random() - 0.5) * 0.15;
+        }
+        update() {
+          this.y -= this.speedY;
+          this.x += this.drift;
+          if (this.y < -10) {
+            this.y = height + 10;
+            this.x = Math.random() * width;
+          }
+          if (this.x < -10) this.x = width + 10;
+          if (this.x > width + 10) this.x = -10;
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 2);
+          grad.addColorStop(0, `rgba(255, 215, 0, ${this.opacity})`);
+          grad.addColorStop(1, `rgba(212, 175, 55, 0)`);
+          ctx.fillStyle = grad;
+          ctx.fill();
+          // tiny core
+          ctx.shadowColor = '#f5c542';
+          ctx.shadowBlur = 12;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size * 0.3, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 235, 150, ${this.opacity+0.2})`;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+      }
+
+      function initParticles(count = 110) {
+        particles = [];
+        for (let i = 0; i < count; i++) {
+          particles.push(new Particle());
+        }
+      }
+      initParticles();
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, width, height);
+        particles.forEach(p => {
+          p.update();
+          p.draw();
+        });
+        requestAnimationFrame(animateParticles);
+      }
+      animateParticles();
+
+      // re-init particles on resize (adjust positions)
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+        initParticles(100);
+      });
+
+      // ---- render gallery on load ----
+      renderGallery();
+
+      // mobile touch: keep download visible on tap (focus-within fallback)
+      // we already use :focus-within in CSS, but add a small polyfill for better mobile:
+      document.addEventListener('touchstart', function() {}, { passive: true });
+
+    })();
+  </script>
+</body>
+</html>
